@@ -88,6 +88,16 @@ public abstract class PluginAdapter implements Plugin {
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return true;
     }
+    
+    public boolean clientCountByModelMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    	return true;
+    }
+    
+    public boolean clientCountByModelMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable) {
+    	return true;
+    }
 
     public boolean clientDeleteByExampleMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable) {
@@ -98,7 +108,7 @@ public abstract class PluginAdapter implements Plugin {
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return true;
     }
-
+    
     public boolean clientDeleteByPrimaryKeyMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable) {
         return true;
@@ -266,6 +276,11 @@ public abstract class PluginAdapter implements Plugin {
     public boolean sqlMapCountByExampleElementGenerated(XmlElement element,
             IntrospectedTable introspectedTable) {
         return true;
+    }
+    
+    public boolean sqlMapCountByModelElementGenerated(XmlElement element,
+    		IntrospectedTable introspectedTable) {
+    	return true;
     }
 
     public boolean sqlMapDeleteByExampleElementGenerated(XmlElement element,

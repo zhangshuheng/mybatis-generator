@@ -263,6 +263,33 @@ public abstract class BaseRules implements Rules {
 
         return rc;
     }
+    
+    /**
+     * Implements the rule for generating the SQL model where clause element.
+     * 
+     * In iBATIS2, generate the element if the selectByExample, deleteByExample,
+     * updateByExample, or countByExample statements are allowed.
+     * 
+     * In MyBatis3, generate the element if the selectByExample,
+     * deleteByExample, or countByExample statements are allowed.
+     * 
+     * @return true if the SQL where clause element should be generated
+     */
+    public boolean generateSQLModelWhereClause() {
+    	if (isModelOnly) {
+    		return false;
+    	}
+    	
+    	boolean rc = tableConfiguration.isSelectByModelStatementEnabled()
+    			|| tableConfiguration.isDeleteByModelStatementEnabled()
+    			|| tableConfiguration.isCountByModelStatementEnabled();
+    	
+    	if (introspectedTable.getTargetRuntime() == TargetRuntime.IBATIS2) {
+    		rc |= tableConfiguration.isUpdateByModelStatementEnabled();
+    	}
+    	
+    	return rc;
+    }
 
     /**
      * Implements the rule for generating the SQL example where clause element
@@ -373,6 +400,13 @@ public abstract class BaseRules implements Rules {
         boolean rc = tableConfiguration.isCountByExampleStatementEnabled();
 
         return rc;
+    }
+    
+    public boolean generateCountByModel() {
+    	
+    	boolean rc = tableConfiguration.isCountByModelStatementEnabled();
+    	
+    	return rc;
     }
 
     public boolean generateUpdateByExampleSelective() {

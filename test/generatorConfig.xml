@@ -17,16 +17,16 @@
       <property name="forceBigDecimals" value="false" />
     </javaTypeResolver>
 
-    <javaModelGenerator targetPackage="org.wl.core.security.domain" targetProject="/opt/work_java/mybatis-generate/target">
+    <javaModelGenerator targetPackage="org.wl.core.security.domain" targetProject="/home/zsh/git/mybatis-generator/target">
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
-	<sqlMapGenerator targetPackage="org.wl.core.security.dao.mapper"  targetProject="/opt/work_java/mybatis-generate/target">
+	<sqlMapGenerator targetPackage="org.wl.core.security.dao.mapper"  targetProject="/home/zsh/git/mybatis-generator/target">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="org.wl.core.security.dao"  targetProject="/opt/work_java/mybatis-generate/target">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="org.wl.core.security.dao"  targetProject="/home/zsh/git/mybatis-generator/target">
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 

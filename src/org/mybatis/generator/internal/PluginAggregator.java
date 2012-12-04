@@ -96,6 +96,18 @@ public final class PluginAggregator implements Plugin {
         return rc;
     }
 
+	public boolean sqlMapCountByModelElementGenerated(XmlElement element, IntrospectedTable table) {
+		boolean rc = true;
+
+        for (Plugin plugin : plugins) {
+            if (!plugin.sqlMapCountByModelElementGenerated(element, table)) {
+                rc = false;
+                break;
+            }
+        }
+
+        return rc;
+	}
     public boolean sqlMapCountByExampleElementGenerated(XmlElement element,
             IntrospectedTable table) {
         boolean rc = true;
@@ -431,6 +443,23 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
+    
+    
+
+	public boolean clientCountByModelMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
+		   boolean rc = true;
+
+	        for (Plugin plugin : plugins) {
+	            if (!plugin.clientCountByModelMethodGenerated(method, interfaze,
+	                    introspectedTable)) {
+	                rc = false;
+	                break;
+	            }
+	        }
+
+	        return rc;
+	}
+    
 
     public boolean clientDeleteByExampleMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable) {
@@ -1192,4 +1221,6 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
+
+
 }

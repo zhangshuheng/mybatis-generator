@@ -41,16 +41,24 @@ public class TableConfiguration extends PropertyHolder {
     private boolean selectByPrimaryKeyStatementEnabled;
 
     private boolean selectByExampleStatementEnabled;
+    
+    private boolean selectByModelStatementEnabled;
 
     private boolean updateByPrimaryKeyStatementEnabled;
 
     private boolean deleteByPrimaryKeyStatementEnabled;
 
     private boolean deleteByExampleStatementEnabled;
+    
+    private boolean deleteByModelStatementEnabled;
 
     private boolean countByExampleStatementEnabled;
+    
+    private boolean countByModelStatementEnabled;
 
     private boolean updateByExampleStatementEnabled;
+    
+    private boolean updateByModelStatementEnabled;
 
     private List<ColumnOverride> columnOverrides;
 
@@ -86,11 +94,15 @@ public class TableConfiguration extends PropertyHolder {
         insertStatementEnabled = true;
         selectByPrimaryKeyStatementEnabled = true;
         selectByExampleStatementEnabled = true;
+        selectByModelStatementEnabled = true;
         updateByPrimaryKeyStatementEnabled = true;
         deleteByPrimaryKeyStatementEnabled = true;
         deleteByExampleStatementEnabled = true;
+        deleteByModelStatementEnabled = true;
         countByExampleStatementEnabled = true;
+        countByModelStatementEnabled = true;
         updateByExampleStatementEnabled = true;
+        updateByModelStatementEnabled = true;
     }
 
     public boolean isDeleteByPrimaryKeyStatementEnabled() {
@@ -118,6 +130,7 @@ public class TableConfiguration extends PropertyHolder {
             boolean selectByPrimaryKeyStatementEnabled) {
         this.selectByPrimaryKeyStatementEnabled = selectByPrimaryKeyStatementEnabled;
     }
+    
 
     public boolean isUpdateByPrimaryKeyStatementEnabled() {
         return updateByPrimaryKeyStatementEnabled;
@@ -186,10 +199,19 @@ public class TableConfiguration extends PropertyHolder {
     public boolean isSelectByExampleStatementEnabled() {
         return selectByExampleStatementEnabled;
     }
+    
+    public boolean isSelectByModelStatementEnabled() {
+    	return selectByModelStatementEnabled;
+    }
 
     public void setSelectByExampleStatementEnabled(
             boolean selectByExampleStatementEnabled) {
         this.selectByExampleStatementEnabled = selectByExampleStatementEnabled;
+    }
+    
+    public void setSelectByModelStatementEnabled(
+    		boolean selectByModelStatementEnabled) {
+    	this.selectByModelStatementEnabled = selectByModelStatementEnabled;
     }
 
     /**
@@ -242,6 +264,16 @@ public class TableConfiguration extends PropertyHolder {
             boolean deleteByExampleStatementEnabled) {
         this.deleteByExampleStatementEnabled = deleteByExampleStatementEnabled;
     }
+    
+    public boolean isDeleteByModelStatementEnabled() {
+    	return deleteByModelStatementEnabled;
+    }
+    
+    public void setDeleteByModelStatementEnabled(
+    		boolean deleteByModelStatementEnabled) {
+    	this.deleteByModelStatementEnabled = deleteByModelStatementEnabled;
+    }
+    
 
     public boolean areAnyStatementsEnabled() {
         return selectByExampleStatementEnabled
@@ -469,12 +501,21 @@ public class TableConfiguration extends PropertyHolder {
     public boolean isCountByExampleStatementEnabled() {
         return countByExampleStatementEnabled;
     }
-
+    
     public void setCountByExampleStatementEnabled(
-            boolean countByExampleStatementEnabled) {
-        this.countByExampleStatementEnabled = countByExampleStatementEnabled;
+    		boolean countByExampleStatementEnabled) {
+    	this.countByExampleStatementEnabled = countByExampleStatementEnabled;
     }
-
+    
+    public boolean isCountByModelStatementEnabled() {
+    	return countByModelStatementEnabled;
+    }
+    
+    public void setCountByModelStatementEnabled(
+    		boolean countByModelStatementEnabled) {
+    	this.countByModelStatementEnabled = countByModelStatementEnabled;
+    }
+    
     public boolean isUpdateByExampleStatementEnabled() {
         return updateByExampleStatementEnabled;
     }
@@ -482,6 +523,15 @@ public class TableConfiguration extends PropertyHolder {
     public void setUpdateByExampleStatementEnabled(
             boolean updateByExampleStatementEnabled) {
         this.updateByExampleStatementEnabled = updateByExampleStatementEnabled;
+    }
+    
+    public boolean isUpdateByModelStatementEnabled() {
+    	return updateByModelStatementEnabled;
+    }
+    
+    public void setUpdateByModelStatementEnabled(
+    		boolean updateByModelStatementEnabled) {
+    	this.updateByModelStatementEnabled = updateByModelStatementEnabled;
     }
 
     public void validate(List<String> errors, int listPosition) {

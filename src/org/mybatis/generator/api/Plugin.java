@@ -503,6 +503,26 @@ public interface Plugin {
      */
     boolean clientCountByExampleMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable);
+    /**
+     * This method is called when the countByModel method has been generated
+     * in the client interface.
+     * 
+     * @param method
+     *            the generated countByModel method
+     * @param interfaze
+     *            the partially implemented client interface. You can add
+     *            additional imported classes to the interface if
+     *            necessary.
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the method should be generated, false if the generated
+     *         method should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean clientCountByModelMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the deleteByExample method has been generated
@@ -1056,6 +1076,22 @@ public interface Plugin {
      */
     boolean sqlMapCountByExampleElementGenerated(XmlElement element,
             IntrospectedTable introspectedTable);
+    
+    /**
+     * This method is called when the countByModel element is generated.
+     * 
+     * @param element
+     *            the generated &lt;select&gt; element
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the element should be generated, false if the generated
+     *         element should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean sqlMapCountByModelElementGenerated(XmlElement element,
+    		IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the deleteByExample element is generated.

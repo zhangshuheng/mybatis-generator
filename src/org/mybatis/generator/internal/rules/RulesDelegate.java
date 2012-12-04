@@ -80,6 +80,10 @@ public class RulesDelegate implements Rules {
     public boolean generateCountByExample() {
         return rules.generateCountByExample();
     }
+    
+    public boolean generateCountByModel() {
+    	return rules.generateCountByModel();
+    }
 
     public boolean generateDeleteByExample() {
         return rules.generateDeleteByExample();
@@ -172,4 +176,8 @@ public class RulesDelegate implements Rules {
     public boolean generateJavaClient() {
         return rules.generateJavaClient();
     }
+
+	public boolean generateSQLModelWhereClause() {
+		 return rules.generateSQLModelWhereClause();
+	}
 }

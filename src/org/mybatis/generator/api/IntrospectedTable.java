@@ -60,6 +60,7 @@ public abstract class IntrospectedTable {
         ATTR_BASE_RECORD_TYPE,
         ATTR_RECORD_WITH_BLOBS_TYPE,
         ATTR_EXAMPLE_TYPE,
+        ATTR_MODEL_TYPE,
         ATTR_IBATIS2_SQL_MAP_PACKAGE,
         ATTR_IBATIS2_SQL_MAP_FILE_NAME,
         ATTR_IBATIS2_SQL_MAP_NAMESPACE,
@@ -72,6 +73,7 @@ public abstract class IntrospectedTable {
         ATTR_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME,
         ATTR_ALIASED_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME,
         ATTR_COUNT_BY_EXAMPLE_STATEMENT_ID,
+        ATTR_COUNT_BY_MODEL_STATEMENT_ID,
         ATTR_DELETE_BY_EXAMPLE_STATEMENT_ID,
         ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID,
         ATTR_INSERT_STATEMENT_ID,
@@ -89,9 +91,11 @@ public abstract class IntrospectedTable {
         ATTR_BASE_RESULT_MAP_ID,
         ATTR_RESULT_MAP_WITH_BLOBS_ID,
         ATTR_EXAMPLE_WHERE_CLAUSE_ID,
+        ATTR_MODEL_WHERE_CLAUSE_ID,
         ATTR_BASE_COLUMN_LIST_ID,
         ATTR_BLOB_COLUMN_LIST_ID,
         ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
+        ATTR_MYBATIS3_UPDATE_BY_MODEL_WHERE_CLAUSE_ID,
         ATTR_MYBATIS3_SQL_PROVIDER_TYPE
     }
 
@@ -353,6 +357,13 @@ public abstract class IntrospectedTable {
     public String getExampleType() {
         return internalAttributes.get(InternalAttribute.ATTR_EXAMPLE_TYPE);
     }
+    /**
+     * 
+     * @return the type for the example class.
+     */
+    public String getModelType() {
+    	return internalAttributes.get(InternalAttribute.ATTR_BASE_RECORD_TYPE);
+    }
 
     /**
      * 
@@ -516,6 +527,7 @@ public abstract class IntrospectedTable {
         setSqlMapAliasedFullyQualifiedRuntimeTableName(calculateSqlMapAliasedFullyQualifiedRuntimeTableName());
 
         setCountByExampleStatementId("countByExample"); //$NON-NLS-1$
+        setCountByModelStatementId("countByModel"); //$NON-NLS-1$
         setDeleteByExampleStatementId("deleteByExample"); //$NON-NLS-1$
         setDeleteByPrimaryKeyStatementId("deleteByPrimaryKey"); //$NON-NLS-1$
         setInsertStatementId("insert"); //$NON-NLS-1$
@@ -533,9 +545,11 @@ public abstract class IntrospectedTable {
         setBaseResultMapId("BaseResultMap"); //$NON-NLS-1$
         setResultMapWithBLOBsId("ResultMapWithBLOBs"); //$NON-NLS-1$
         setExampleWhereClauseId("Example_Where_Clause"); //$NON-NLS-1$
+        setModelWhereClauseId("Model_Where_Clause"); //$NON-NLS-1$
         setBaseColumnListId("Base_Column_List"); //$NON-NLS-1$
         setBlobColumnListId("Blob_Column_List"); //$NON-NLS-1$
         setMyBatis3UpdateByExampleWhereClauseId("Update_By_Example_Where_Clause"); //$NON-NLS-1$
+        setMyBatis3UpdateByModelWhereClauseId("Update_By_Model_Where_Clause"); //$NON-NLS-1$
     }
 
     public void setBlobColumnListId(String s) {
@@ -550,12 +564,24 @@ public abstract class IntrospectedTable {
         internalAttributes.put(InternalAttribute.ATTR_EXAMPLE_WHERE_CLAUSE_ID,
                 s);
     }
+    
+    public void setModelWhereClauseId(String s) {
+    	internalAttributes.put(InternalAttribute.ATTR_MODEL_WHERE_CLAUSE_ID,
+    			s);
+    }
 
     public void setMyBatis3UpdateByExampleWhereClauseId(String s) {
         internalAttributes
                 .put(
                         InternalAttribute.ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
                         s);
+    }
+    
+    public void setMyBatis3UpdateByModelWhereClauseId(String s) {
+    	internalAttributes
+    	.put(
+    			InternalAttribute.ATTR_MYBATIS3_UPDATE_BY_MODEL_WHERE_CLAUSE_ID,
+    			s);
     }
 
     public void setResultMapWithBLOBsId(String s) {
@@ -650,6 +676,11 @@ public abstract class IntrospectedTable {
         internalAttributes.put(
                 InternalAttribute.ATTR_COUNT_BY_EXAMPLE_STATEMENT_ID, s);
     }
+    
+    public void setCountByModelStatementId(String s) {
+    	internalAttributes.put(
+    			InternalAttribute.ATTR_COUNT_BY_MODEL_STATEMENT_ID, s);
+    }
 
     public String getBlobColumnListId() {
         return internalAttributes
@@ -665,10 +696,21 @@ public abstract class IntrospectedTable {
         return internalAttributes
                 .get(InternalAttribute.ATTR_EXAMPLE_WHERE_CLAUSE_ID);
     }
+ 
+    
+    public String getModelWhereClauseId() {
+    	return internalAttributes
+    			.get(InternalAttribute.ATTR_MODEL_WHERE_CLAUSE_ID);
+    }
 
     public String getMyBatis3UpdateByExampleWhereClauseId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID);
+    }
+    
+    public String getMyBatis3UpdateByModelWhereClauseId() {
+    	return internalAttributes
+    			.get(InternalAttribute.ATTR_MYBATIS3_UPDATE_BY_MODEL_WHERE_CLAUSE_ID);
     }
 
     public String getResultMapWithBLOBsId() {
@@ -754,6 +796,11 @@ public abstract class IntrospectedTable {
     public String getCountByExampleStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_COUNT_BY_EXAMPLE_STATEMENT_ID);
+    }
+    
+    public String getCountByModelStatementId() {
+    	return internalAttributes
+    			.get(InternalAttribute.ATTR_COUNT_BY_MODEL_STATEMENT_ID);
     }
 
     protected String calculateJavaClientImplementationPackage() {

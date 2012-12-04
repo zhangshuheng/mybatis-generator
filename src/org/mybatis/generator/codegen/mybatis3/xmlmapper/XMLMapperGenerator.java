@@ -27,11 +27,13 @@ import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.AbstractXmlElem
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.BaseColumnListElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.BlobColumnListElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.CountByExampleElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.CountByModelElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.DeleteByExampleElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.DeleteByPrimaryKeyElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ExampleWhereClauseElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.InsertElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.InsertSelectiveElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ModelWhereClauseElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithoutBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithBLOBsElementGenerator;
@@ -87,10 +89,14 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         addUpdateByPrimaryKeyWithBLOBsElement(answer);
         addUpdateByPrimaryKeyWithoutBLOBsElement(answer);
 
+        addModelWhereClauseElement(answer);
+        addCountByModelElement(answer);
+        
         return answer;
     }
 
-    protected void addResultMapWithoutBLOBsElement(XmlElement parentElement) {
+
+	protected void addResultMapWithoutBLOBsElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateBaseResultMap()) {
             AbstractXmlElementGenerator elementGenerator = new ResultMapWithoutBLOBsElementGenerator(false);
             initializeAndExecuteGenerator(elementGenerator, parentElement);
@@ -110,6 +116,14 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
                     false);
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+    
+    protected void addModelWhereClauseElement(XmlElement parentElement) {
+    	if (introspectedTable.getRules().generateSQLModelWhereClause()) {
+    		AbstractXmlElementGenerator elementGenerator = new ModelWhereClauseElementGenerator(
+    				false);
+    		initializeAndExecuteGenerator(elementGenerator, parentElement);
+    	}
     }
 
     protected void addMyBatis3UpdateByExampleWhereClauseElement(
@@ -191,6 +205,13 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             AbstractXmlElementGenerator elementGenerator = new CountByExampleElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+    
+    protected void addCountByModelElement(XmlElement parentElement) {
+    	if (introspectedTable.getRules().generateCountByModel()) {
+    		AbstractXmlElementGenerator elementGenerator = new CountByModelElementGenerator();
+    		initializeAndExecuteGenerator(elementGenerator, parentElement);
+    	}
     }
 
     protected void addUpdateByExampleSelectiveElement(XmlElement parentElement) {

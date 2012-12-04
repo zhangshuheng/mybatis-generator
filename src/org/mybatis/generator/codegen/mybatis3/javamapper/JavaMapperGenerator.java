@@ -31,6 +31,7 @@ import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
 import org.mybatis.generator.codegen.AbstractXmlGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.AbstractJavaMapperMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.CountByExampleMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.CountByModelMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByExampleMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.DeleteByPrimaryKeyMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertMethodGenerator;
@@ -104,6 +105,22 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         addUpdateByPrimaryKeySelectiveMethod(interfaze);
         addUpdateByPrimaryKeyWithBLOBsMethod(interfaze);
         addUpdateByPrimaryKeyWithoutBLOBsMethod(interfaze);
+        
+        addCountByModelMethod(interfaze);
+//        addDeleteByModelMethod(interfaze);
+//        addSelectByModelWithBLOBsMethod(interfaze);
+//        addSelectByModelWithoutBLOBsMethod(interfaze);
+//        addUpdateByModelSelectiveMethod(interfaze);
+//        addUpdateByModelWithBLOBsMethod(interfaze);
+//        addUpdateByModelWithoutBLOBsMethod(interfaze);
+//        
+//        addSelectPageByModelWithBLOBsMethod(interfaze);
+//        addSelectPageByModelWithoutBLOBsMethod(interfaze);
+//        
+//        addSelectPageByExampleWithBLOBsMethod(interfaze);
+//        addSelectPageByExampleWithoutBLOBsMethod(interfaze);
+        
+        
 
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();
         if (context.getPlugins().clientGenerated(interfaze, null,
@@ -119,7 +136,14 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         return answer;
     }
 
-    protected void addCountByExampleMethod(Interface interfaze) {
+    private void addCountByModelMethod(Interface interfaze) {
+    	 if (introspectedTable.getRules().generateCountByModel()) {
+             AbstractJavaMapperMethodGenerator methodGenerator = new CountByModelMethodGenerator();
+             initializeAndExecuteGenerator(methodGenerator, interfaze);
+         }
+	}
+
+	protected void addCountByExampleMethod(Interface interfaze) {
         if (introspectedTable.getRules().generateCountByExample()) {
             AbstractJavaMapperMethodGenerator methodGenerator = new CountByExampleMethodGenerator();
             initializeAndExecuteGenerator(methodGenerator, interfaze);

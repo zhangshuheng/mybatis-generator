@@ -87,6 +87,18 @@ public abstract class AbstractXmlElementGenerator extends AbstractGenerator {
 
         return ifElement;
     }
+    
+    protected XmlElement getModelIncludeElement() {
+    	XmlElement ifElement = new XmlElement("if"); //$NON-NLS-1$
+    	ifElement.addAttribute(new Attribute("test", "_parameter != null")); //$NON-NLS-1$ //$NON-NLS-2$
+    	
+    	XmlElement includeElement = new XmlElement("include"); //$NON-NLS-1$
+    	includeElement.addAttribute(new Attribute("refid", //$NON-NLS-1$
+    			introspectedTable.getModelWhereClauseId()));
+    	ifElement.addElement(includeElement);
+    	
+    	return ifElement;
+    }
 
     protected XmlElement getUpdateByExampleIncludeElement() {
         XmlElement ifElement = new XmlElement("if"); //$NON-NLS-1$
