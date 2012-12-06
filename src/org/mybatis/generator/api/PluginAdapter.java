@@ -144,6 +144,16 @@ public abstract class PluginAdapter implements Plugin {
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return true;
     }
+    
+    public boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable) {
+    	return true;
+    }
+    
+    public boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    	return true;
+    }
 
     public boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable) {
@@ -153,6 +163,16 @@ public abstract class PluginAdapter implements Plugin {
     public boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return true;
+    }
+    
+    public boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable) {
+    	return true;
+    }
+    
+    public boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    	return true;
     }
 
     public boolean clientSelectByPrimaryKeyMethodGenerated(Method method,
@@ -322,10 +342,20 @@ public abstract class PluginAdapter implements Plugin {
             XmlElement element, IntrospectedTable introspectedTable) {
         return true;
     }
+    
+    public boolean sqlMapSelectByModelWithoutBLOBsElementGenerated(
+    		XmlElement element, IntrospectedTable introspectedTable) {
+    	return true;
+    }
 
     public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable) {
         return true;
+    }
+    
+    public boolean sqlMapSelectByModelWithBLOBsElementGenerated(
+    		XmlElement element, IntrospectedTable introspectedTable) {
+    	return true;
     }
 
     public boolean sqlMapSelectByPrimaryKeyElementGenerated(XmlElement element,

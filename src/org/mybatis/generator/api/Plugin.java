@@ -314,6 +314,26 @@ public interface Plugin {
      */
     boolean clientSelectByExampleWithBLOBsMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
+    /**
+     * This method is called when the selectByExampleWithBLOBs method has been
+     * generated in the client implementation class.
+     * 
+     * @param method
+     *            the generated selectByExampleWithBLOBs method
+     * @param topLevelClass
+     *            the partially implemented client implementation class. You can
+     *            add additional imported classes to the implementation class if
+     *            necessary.
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the method should be generated, false if the generated
+     *         method should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the selectByExampleWithoutBLOBs method has
@@ -335,6 +355,27 @@ public interface Plugin {
      */
     boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
+    
+    /**
+     * This method is called when the selectByModelWithoutBLOBs method has
+     * been generated in the client implementation class.
+     * 
+     * @param method
+     *            the generated selectByExampleWithoutBLOBs method
+     * @param topLevelClass
+     *            the partially implemented client implementation class. You can
+     *            add additional imported classes to the implementation class if
+     *            necessary.
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the method should be generated, false if the generated
+     *         method should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the selectByPrimaryKey method has been
@@ -671,6 +712,27 @@ public interface Plugin {
      */
     boolean clientSelectByExampleWithBLOBsMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable);
+    
+    /**
+     * This method is called when the selectByExampleWithBLOBs method has been
+     * generated in the client interface.
+     * 
+     * @param method
+     *            the generated selectByExampleWithBLOBs method
+     * @param interfaze
+     *            the partially implemented client interface. You can add
+     *            additional imported classes to the interface if
+     *            necessary.
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the method should be generated, false if the generated
+     *         method should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the selectByExampleWithoutBLOBs method has
@@ -692,6 +754,27 @@ public interface Plugin {
      */
     boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable);
+    
+    /**
+     * This method is called when the selectByModelWithoutBLOBs method has
+     * been generated in the client interface.
+     * 
+     * @param method
+     *            the generated selectByExampleWithoutBLOBs method
+     * @param interfaze
+     *            the partially implemented client interface. You can add
+     *            additional imported classes to the interface if
+     *            necessary.
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the method should be generated, false if the generated
+     *         method should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the selectByPrimaryKey method has been
@@ -1286,6 +1369,40 @@ public interface Plugin {
      */
     boolean sqlMapSelectByExampleWithBLOBsElementGenerated(XmlElement element,
             IntrospectedTable introspectedTable);
+    
+    
+    /**
+     * This method is called when the selectByModel element is generated.
+     * 
+     * @param element
+     *            the generated &lt;select&gt; element
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the element should be generated, false if the generated
+     *         element should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean sqlMapSelectByModelWithoutBLOBsElementGenerated(
+    		XmlElement element, IntrospectedTable introspectedTable);
+
+    /**
+     * This method is called when the selectByExampleWithBLOBs element is
+     * generated.
+     * 
+     * @param element
+     *            the generated &lt;select&gt; element
+     * @param introspectedTable
+     *            The class containing information about the table as
+     *            introspected from the database
+     * @return true if the element should be generated, false if the generated
+     *         element should be ignored. In the case of multiple plugins, the
+     *         first plugin returning false will disable the calling of further
+     *         plugins.
+     */
+    boolean sqlMapSelectByModelWithBLOBsElementGenerated(XmlElement element,
+    		IntrospectedTable introspectedTable);
 
     /**
      * This method is called when the updateByExampleSelective element is

@@ -69,6 +69,8 @@ public class TableConfiguration extends PropertyHolder {
     private String selectByPrimaryKeyQueryId;
 
     private String selectByExampleQueryId;
+    
+    private String selectByModelQueryId;
 
     private String catalog;
     private String schema;
@@ -93,6 +95,7 @@ public class TableConfiguration extends PropertyHolder {
 
         insertStatementEnabled = true;
         selectByPrimaryKeyStatementEnabled = true;
+        selectByExampleStatementEnabled = true;
         selectByExampleStatementEnabled = true;
         selectByModelStatementEnabled = true;
         updateByPrimaryKeyStatementEnabled = true;
@@ -246,6 +249,14 @@ public class TableConfiguration extends PropertyHolder {
 
     public void setSelectByExampleQueryId(String selectByExampleQueryId) {
         this.selectByExampleQueryId = selectByExampleQueryId;
+    }
+    
+    public String getSelectByModelQueryId() {
+    	return selectByModelQueryId;
+    }
+
+    public void setSelectByModelQueryId(String selectByModelQueryId) {
+        this.selectByModelQueryId = selectByModelQueryId;
     }
 
     public String getSelectByPrimaryKeyQueryId() {
@@ -405,6 +416,11 @@ public class TableConfiguration extends PropertyHolder {
             xmlElement.addAttribute(new Attribute(
                     "enableSelectByExample", "false")); //$NON-NLS-1$ //$NON-NLS-2$
         }
+        
+        if (!selectByModelStatementEnabled) {
+        	xmlElement.addAttribute(new Attribute(
+        			"enableSelectByModel", "false")); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
         if (!updateByPrimaryKeyStatementEnabled) {
             xmlElement.addAttribute(new Attribute(
@@ -424,6 +440,11 @@ public class TableConfiguration extends PropertyHolder {
         if (!countByExampleStatementEnabled) {
             xmlElement.addAttribute(new Attribute(
                     "enableCountByExample", "false")); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        
+        if (!countByModelStatementEnabled) {
+        	xmlElement.addAttribute(new Attribute(
+        			"enableCountByModel", "false")); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         if (!updateByExampleStatementEnabled) {

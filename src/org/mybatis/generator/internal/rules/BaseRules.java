@@ -228,7 +228,8 @@ public abstract class BaseRules implements Rules {
                 rc = true;
             } else {
                 rc = tableConfiguration.isSelectByExampleStatementEnabled() 
-                        || tableConfiguration.isSelectByPrimaryKeyStatementEnabled();
+                        || tableConfiguration.isSelectByPrimaryKeyStatementEnabled()
+                	|| tableConfiguration.isSelectByModelStatementEnabled();
             }
         } else {
             rc = false;
@@ -346,6 +347,20 @@ public abstract class BaseRules implements Rules {
         
         return tableConfiguration.isSelectByExampleStatementEnabled();
     }
+    /**
+     * Implements the rule for generating the select by model without BLOBs
+     * SQL Map element and DAO method. If the selectByExample statement is
+     * allowed, then generate the element and method.
+     * 
+     * @return true if the element and method should be generated
+     */
+    public boolean generateSelectByModelWithoutBLOBs() {
+    	if (isModelOnly) {
+    		return false;
+    	}
+    	
+    	return tableConfiguration.isSelectByModelStatementEnabled();
+    }
 
     /**
      * Implements the rule for generating the select by example with BLOBs SQL
@@ -364,6 +379,25 @@ public abstract class BaseRules implements Rules {
                 && introspectedTable.hasBLOBColumns();
 
         return rc;
+    }
+    
+    /**
+     * Implements the rule for generating the select by example with BLOBs SQL
+     * Map element and DAO method. If the table has BLOB fields and the
+     * selectByExample statement is allowed, then generate the element and
+     * method.
+     * 
+     * @return true if the element and method should be generated
+     */
+    public boolean generateSelectByModelWithBLOBs() {
+    	if (isModelOnly) {
+    		return false;
+    	}
+    	
+    	boolean rc = tableConfiguration.isSelectByModelStatementEnabled()
+    			&& introspectedTable.hasBLOBColumns();
+    	
+    	return rc;
     }
 
     /**

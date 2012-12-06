@@ -38,6 +38,8 @@ import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertMethodGe
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertSelectiveMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithBLOBsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithoutBLOBsMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByModelWithBLOBsMethodGenerator;
+import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByModelWithoutBLOBsMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByPrimaryKeyMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.UpdateByExampleSelectiveMethodGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.UpdateByExampleWithBLOBsMethodGenerator;
@@ -107,9 +109,10 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         addUpdateByPrimaryKeyWithoutBLOBsMethod(interfaze);
         
         addCountByModelMethod(interfaze);
+        addSelectByModelWithBLOBsMethod(interfaze);
+        addSelectByModelWithoutBLOBsMethod(interfaze);
 //        addDeleteByModelMethod(interfaze);
 //        addSelectByModelWithBLOBsMethod(interfaze);
-//        addSelectByModelWithoutBLOBsMethod(interfaze);
 //        addUpdateByModelSelectiveMethod(interfaze);
 //        addUpdateByModelWithBLOBsMethod(interfaze);
 //        addUpdateByModelWithoutBLOBsMethod(interfaze);
@@ -136,7 +139,8 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         return answer;
     }
 
-    private void addCountByModelMethod(Interface interfaze) {
+
+    protected void addCountByModelMethod(Interface interfaze) {
     	 if (introspectedTable.getRules().generateCountByModel()) {
              AbstractJavaMapperMethodGenerator methodGenerator = new CountByModelMethodGenerator();
              initializeAndExecuteGenerator(methodGenerator, interfaze);
@@ -190,6 +194,21 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByExampleWithoutBLOBsMethodGenerator();
             initializeAndExecuteGenerator(methodGenerator, interfaze);
         }
+    }
+    
+
+    protected void addSelectByModelWithoutBLOBsMethod(Interface interfaze) {
+    	 if (introspectedTable.getRules().generateSelectByModelWithoutBLOBs()) {
+             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithoutBLOBsMethodGenerator();
+             initializeAndExecuteGenerator(methodGenerator, interfaze);
+         }
+	}
+    
+    protected void addSelectByModelWithBLOBsMethod(Interface interfaze) {
+    	if (introspectedTable.getRules().generateSelectByModelWithBLOBs()) {
+    		AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithBLOBsMethodGenerator();
+    		initializeAndExecuteGenerator(methodGenerator, interfaze);
+    	}
     }
 
     protected void addSelectByPrimaryKeyMethod(Interface interfaze) {

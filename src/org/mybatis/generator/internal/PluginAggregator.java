@@ -279,6 +279,21 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
+    
+    public boolean sqlMapSelectByModelWithoutBLOBsElementGenerated(
+    		XmlElement element, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.sqlMapSelectByModelWithoutBLOBsElementGenerated(
+    				element, introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
+    }
 
     public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable) {
@@ -293,6 +308,21 @@ public final class PluginAggregator implements Plugin {
         }
 
         return rc;
+    }
+    
+    public boolean sqlMapSelectByModelWithBLOBsElementGenerated(
+    		XmlElement element, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.sqlMapSelectByModelWithBLOBsElementGenerated(element,
+    				introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
     }
 
     public boolean sqlMapSelectByPrimaryKeyElementGenerated(XmlElement element,
@@ -610,6 +640,21 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
+    
+    public boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.clientSelectByModelWithBLOBsMethodGenerated(method,
+    				interfaze, introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
+    }
 
     public boolean clientSelectByExampleWithBLOBsMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -624,6 +669,21 @@ public final class PluginAggregator implements Plugin {
         }
 
         return rc;
+    }
+    
+    public boolean clientSelectByModelWithBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.clientSelectByModelWithBLOBsMethodGenerated(method,
+    				topLevelClass, introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
     }
 
     public boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
@@ -640,6 +700,21 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
+    
+    public boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		Interface interfaze, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.clientSelectByModelWithoutBLOBsMethodGenerated(method,
+    				interfaze, introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
+    }
 
     public boolean clientSelectByExampleWithoutBLOBsMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -654,6 +729,21 @@ public final class PluginAggregator implements Plugin {
         }
 
         return rc;
+    }
+    
+    public boolean clientSelectByModelWithoutBLOBsMethodGenerated(Method method,
+    		TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    	boolean rc = true;
+    	
+    	for (Plugin plugin : plugins) {
+    		if (!plugin.clientSelectByModelWithoutBLOBsMethodGenerated(method,
+    				topLevelClass, introspectedTable)) {
+    			rc = false;
+    			break;
+    		}
+    	}
+    	
+    	return rc;
     }
 
     public boolean clientSelectByPrimaryKeyMethodGenerated(Method method,
@@ -1221,6 +1311,4 @@ public final class PluginAggregator implements Plugin {
 
         return rc;
     }
-
-
 }

@@ -124,6 +124,14 @@ public class RulesDelegate implements Rules {
     public boolean generateSelectByExampleWithoutBLOBs() {
         return rules.generateSelectByExampleWithoutBLOBs();
     }
+    
+    public boolean generateSelectByModelWithBLOBs() {
+    	return rules.generateSelectByModelWithBLOBs();
+    }
+    
+    public boolean generateSelectByModelWithoutBLOBs() {
+    	return rules.generateSelectByModelWithoutBLOBs();
+    }
 
     public boolean generateSelectByPrimaryKey() {
         return rules.generateSelectByPrimaryKey();

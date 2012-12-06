@@ -38,6 +38,8 @@ import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithBL
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.ResultMapWithoutBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByExampleWithoutBLOBsElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByModelWithBLOBsElementGenerator;
+import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByModelWithoutBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.SelectByPrimaryKeyElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByExampleSelectiveElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByExampleWithBLOBsElementGenerator;
@@ -91,6 +93,8 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
 
         addModelWhereClauseElement(answer);
         addCountByModelElement(answer);
+        addSelectByModelWithBLOBsElement(answer);
+        addSelectByModelWithoutBLOBsElement(answer);
         
         return answer;
     }
@@ -163,6 +167,20 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             AbstractXmlElementGenerator elementGenerator = new SelectByExampleWithBLOBsElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
+    }
+    protected void addSelectByModelWithoutBLOBsElement(
+    		XmlElement parentElement) {
+    	if (introspectedTable.getRules().generateSelectByModelWithoutBLOBs()) {
+    		AbstractXmlElementGenerator elementGenerator = new SelectByModelWithoutBLOBsElementGenerator();
+    		initializeAndExecuteGenerator(elementGenerator, parentElement);
+    	}
+    }
+    
+    protected void addSelectByModelWithBLOBsElement(XmlElement parentElement) {
+    	if (introspectedTable.getRules().generateSelectByModelWithBLOBs()) {
+    		AbstractXmlElementGenerator elementGenerator = new SelectByModelWithBLOBsElementGenerator();
+    		initializeAndExecuteGenerator(elementGenerator, parentElement);
+    	}
     }
 
     protected void addSelectByPrimaryKeyElement(XmlElement parentElement) {

@@ -195,6 +195,15 @@ public interface Rules {
      * @return true if the element and method should be generated
      */
     boolean generateSelectByExampleWithoutBLOBs();
+    
+    /**
+     * Implements the rule for generating the select by model without BLOBs
+     * SQL Map element and DAO method. If the selectByExample statement is
+     * allowed, then generate the element and method.
+     * 
+     * @return true if the element and method should be generated
+     */
+    boolean generateSelectByModelWithoutBLOBs();
 
     /**
      * Implements the rule for generating the select by example with BLOBs SQL
@@ -205,6 +214,16 @@ public interface Rules {
      * @return true if the element and method should be generated
      */
     boolean generateSelectByExampleWithBLOBs();
+    
+    /**
+     * Implements the rule for generating the select by model with BLOBs SQL
+     * Map element and DAO method. If the table has BLOB fields and the
+     * selectByExample statement is allowed, then generate the element and
+     * method.
+     * 
+     * @return true if the element and method should be generated
+     */
+    boolean generateSelectByModelWithBLOBs();
 
     /**
      * Implements the rule for generating an example class. The class should be
