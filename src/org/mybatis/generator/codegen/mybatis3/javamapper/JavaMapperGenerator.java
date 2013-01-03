@@ -142,7 +142,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
 
     protected void addCountByModelMethod(Interface interfaze) {
     	 if (introspectedTable.getRules().generateCountByModel()) {
-             AbstractJavaMapperMethodGenerator methodGenerator = new CountByModelMethodGenerator();
+             AbstractJavaMapperMethodGenerator methodGenerator = new CountByModelMethodGenerator(false);
              initializeAndExecuteGenerator(methodGenerator, interfaze);
          }
 	}
@@ -199,14 +199,14 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
 
     protected void addSelectByModelWithoutBLOBsMethod(Interface interfaze) {
     	 if (introspectedTable.getRules().generateSelectByModelWithoutBLOBs()) {
-             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithoutBLOBsMethodGenerator();
+             AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithoutBLOBsMethodGenerator(false);
              initializeAndExecuteGenerator(methodGenerator, interfaze);
          }
 	}
     
     protected void addSelectByModelWithBLOBsMethod(Interface interfaze) {
     	if (introspectedTable.getRules().generateSelectByModelWithBLOBs()) {
-    		AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithBLOBsMethodGenerator();
+    		AbstractJavaMapperMethodGenerator methodGenerator = new SelectByModelWithBLOBsMethodGenerator(false);
     		initializeAndExecuteGenerator(methodGenerator, interfaze);
     	}
     }

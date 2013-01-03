@@ -32,23 +32,40 @@ import org.mybatis.generator.api.dom.java.Parameter;
 public class CountByModelMethodGenerator extends
         AbstractJavaMapperMethodGenerator {
 
-    public CountByModelMethodGenerator() {
+	boolean isSimple;
+	
+    public CountByModelMethodGenerator(boolean isSimple) {
         super();
+        this.isSimple = isSimple;
     }
 
     @Override
     public void addInterfaceElements(Interface interfaze) {
-        FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(
-                introspectedTable.getModelType());
+//        FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(
+//                introspectedTable.getModelType());
 
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
-        importedTypes.add(fqjt);
+//        importedTypes.add(fqjt);
 
+        FullyQualifiedJavaType parameterType;
+        if (isSimple) {
+            parameterType = new FullyQualifiedJavaType(
+                    introspectedTable.getBaseRecordType());
+        } else {
+            parameterType = introspectedTable.getRules()
+                    .calculateAllFieldsClass();
+        }
+
+        importedTypes.add(parameterType);
+        
+        
+        
         Method method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setReturnType(FullyQualifiedJavaType.getIntInstance());
         method.setName(introspectedTable.getCountByModelStatementId());
-        method.addParameter(new Parameter(fqjt, "model")); //$NON-NLS-1$
+//        method.addParameter(new Parameter(fqjt, "model")); //$NON-NLS-1$
+        method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 

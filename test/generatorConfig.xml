@@ -7,30 +7,48 @@
 <!--   <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
 
   <context id="Tables" targetRuntime="MyBatis3">
+  
+  	<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+    <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+<!--     <plugin type="org.mybatis.generator.plugins.CachePlugin" /> -->
+  
     <jdbcConnection driverClass="org.postgresql.Driver"
         connectionURL="jdbc:postgresql://localhost/test"
         userId="postgres"
         password="admin">
     </jdbcConnection>
+<!-- 	<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin> -->
 
+	
+<!-- 	<commentGenerator> -->
+<!-- 		<property name="suppressDate" value="true" /> -->
+<!-- 	</commentGenerator> -->
+	
     <javaTypeResolver >
       <property name="forceBigDecimals" value="false" />
     </javaTypeResolver>
 
-    <javaModelGenerator targetPackage="org.wl.core.security.domain" targetProject="/home/zsh/git/mybatis-generator/target">
+    <javaModelGenerator targetPackage="org.wl.core.security.domain" targetProject="/home/zsh/git/ft/src/">
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
-	<sqlMapGenerator targetPackage="org.wl.core.security.dao.mapper"  targetProject="/home/zsh/git/mybatis-generator/target">
+	<sqlMapGenerator targetPackage="org.wl.core.security.dao.mapper"  targetProject="/home/zsh/git/ft/src/">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
-    <javaClientGenerator type="XMLMAPPER" targetPackage="org.wl.core.security.dao"  targetProject="/home/zsh/git/mybatis-generator/target">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="org.wl.core.security.dao"  targetProject="/home/zsh/git/ft/src/">
       <property name="enableSubPackages" value="true" />
+      <property name="rootInterface" value="org.wl.core.dao.sqlmapper.SqlMapper" />
     </javaClientGenerator>
 
     <table tableName="sys_role" domainObjectName="WlRole" >
+      <property name="useActualColumnNames" value="true"/>
+<!--       <generatedKey column="userid" sqlStatement="postgresql" identity="true" /> -->
+    </table>
+
+    <table tableName="sys_resource" domainObjectName="WlResource" >
       <property name="useActualColumnNames" value="true"/>
 <!--       <generatedKey column="userid" sqlStatement="postgresql" identity="true" /> -->
     </table>

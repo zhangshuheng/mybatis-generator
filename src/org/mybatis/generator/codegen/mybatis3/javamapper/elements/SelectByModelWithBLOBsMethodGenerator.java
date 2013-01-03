@@ -31,16 +31,25 @@ import org.mybatis.generator.api.dom.java.Parameter;
  */
 public class SelectByModelWithBLOBsMethodGenerator extends
         AbstractJavaMapperMethodGenerator {
-
-    public SelectByModelWithBLOBsMethodGenerator() {
+	boolean isSimple;
+    public SelectByModelWithBLOBsMethodGenerator(boolean isSimple) {
         super();
+        this.isSimple = isSimple;
     }
 
     @Override
     public void addInterfaceElements(Interface interfaze) {
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
-        FullyQualifiedJavaType type = new FullyQualifiedJavaType(
-                introspectedTable.getModelType());
+
+        FullyQualifiedJavaType type;
+        if (isSimple) {
+        	type = new FullyQualifiedJavaType(
+                    introspectedTable.getBaseRecordType());
+        } else {
+        	type = introspectedTable.getRules()
+                    .calculateAllFieldsClass();
+        }
+        
         importedTypes.add(type);
         importedTypes.add(FullyQualifiedJavaType.getNewListInstance());
 

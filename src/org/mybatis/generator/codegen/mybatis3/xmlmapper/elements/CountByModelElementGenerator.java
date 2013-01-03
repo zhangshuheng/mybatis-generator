@@ -15,6 +15,10 @@
  */
 package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
@@ -26,6 +30,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  */
 public class CountByModelElementGenerator extends AbstractXmlElementGenerator {
 
+	boolean isSimple = false; 
     public CountByModelElementGenerator() {
         super();
     }
@@ -34,8 +39,19 @@ public class CountByModelElementGenerator extends AbstractXmlElementGenerator {
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
-        String fqjt = introspectedTable.getModelType();
+//        String fqjt = introspectedTable.getModelType();
 
+//      importedTypes.add(fqjt);
+
+      String fqjt;
+      if (isSimple) {
+    	  fqjt = introspectedTable.getBaseRecordType();
+      } else {
+    	  fqjt = introspectedTable.getRules()
+                  .calculateAllFieldsClass().getFullyQualifiedName();
+      }
+        
+        
         answer.addAttribute(new Attribute(
                 "id", introspectedTable.getCountByModelStatementId())); //$NON-NLS-1$
         answer.addAttribute(new Attribute("parameterType", fqjt)); //$NON-NLS-1$

@@ -28,13 +28,20 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  */
 public class SelectByModelWithBLOBsElementGenerator extends AbstractXmlElementGenerator {
 
+	boolean isSimple = false; 
 	public SelectByModelWithBLOBsElementGenerator() {
 		super();
 	}
 
 	@Override
 	public void addElements(XmlElement parentElement) {
-		String fqjt = introspectedTable.getModelType();
+      String fqjt;
+      if (isSimple) {
+    	  fqjt = introspectedTable.getBaseRecordType();
+      } else {
+    	  fqjt = introspectedTable.getRules()
+                  .calculateAllFieldsClass().getFullyQualifiedName();
+      }
 
 		XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 		answer.addAttribute(new Attribute("id", introspectedTable.getSelectByModelWithBLOBsStatementId())); //$NON-NLS-1$

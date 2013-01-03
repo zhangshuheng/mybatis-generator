@@ -29,14 +29,20 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 public class SelectByModelWithoutBLOBsElementGenerator extends
         AbstractXmlElementGenerator {
 
+	boolean isSimple = false; 
     public SelectByModelWithoutBLOBsElementGenerator() {
         super();
     }
 
     @Override
     public void addElements(XmlElement parentElement) {
-        String fqjt = introspectedTable.getModelType();
-
+        String fqjt;
+        if (isSimple) {
+      	  fqjt = introspectedTable.getBaseRecordType();
+        } else {
+      	  fqjt = introspectedTable.getRules()
+                    .calculateAllFieldsClass().getFullyQualifiedName();
+        }
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
         answer.addAttribute(new Attribute("id", //$NON-NLS-1$
